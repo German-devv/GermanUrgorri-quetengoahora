@@ -51,12 +51,36 @@ $semana = [
 
 $horario = [
 
-     $startDate = date('8:00'),
-     $startDate = date('8:55'),
-     $startDate = date('9:50'),
-     $startDate = date('11:15'),
-     $startDate = date('12:10'),
-     $startDate = date('13:05'),
+     [
+        $startDate = date('8:00'),
+        $endDate = date('8:55')
+    ],
+
+     [
+        $startDate = date('8:55'),
+        $endDate = date('9:50')
+    ],
+
+     [
+        $startDate = date('9:50'),
+        $endDate = date('11:15')
+    ],
+
+     [
+        $startDate = date('11:15'),
+        $endDate = date('12;10')
+    ],
+
+     [
+        $startDate = date('12:10'),
+        $endDate = date('13;05')
+    ],
+
+     [
+        $startDate = date('13:05'),
+        $endDate = date('14:00')
+    ],
+
 
 ];
 

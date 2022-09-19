@@ -1,5 +1,35 @@
 <?php
 
+
+$asignatura =  [
+    "DEW" => [
+        "profesor" => "MARIA DEL CARMEN RODRIGUEZ SUAREZ",
+        "taller" => "G201"
+    ],
+
+
+    "DSW" => [
+        "profesor" => "SERGIO RAMOS SUAREZ",
+        "taller" => "G201"
+    ],
+
+    "DPL" => [
+        "profesor" => "MARIA ANTONIA MONTESDEOCA VIERA",
+        "taller" => "G201"
+    ],
+
+    "DOR" => [
+        "profesor" => "ERMIS",
+        "taller" => "G201"
+    ],
+
+    "EMR" => [
+        "profesor" => "profe",
+        "taller" => "G201"
+    ],
+
+];
+
 $semana = [
     'lunes' => [
          'EMR',
@@ -48,37 +78,36 @@ $semana = [
 
 ];
 
-
 $horario = [
 
      [
-        $startDate = date('8:00'),
-        $endDate = date('8:55')
+        date('8:00'),
+        date('8:55')
     ],
 
      [
-        $startDate = date('8:55'),
-        $endDate = date('9:50')
+        date('8:55'),
+        date('9:50')
     ],
 
      [
-        $startDate = date('9:50'),
-        $endDate = date('11:15')
+        date('9:50'),
+        date('11:15')
     ],
 
      [
-        $startDate = date('11:15'),
-        $endDate = date('12;10')
+        date('11:15'),
+        date('12:10')
     ],
 
      [
-        $startDate = date('12:10'),
-        $endDate = date('13;05')
+        date('12:10'),
+        date('13:05')
     ],
 
      [
-        $startDate = date('13:05'),
-        $endDate = date('14:00')
+        date('13:05'),
+        date('14:00')
     ],
 
 
@@ -88,7 +117,22 @@ $horario = [
 
 
 function getHorario(){
+    echo '<table>';
+    echo '<tr>';
+    echo     '<th> Horario</th>';
+    echo '</tr>';
 
+    foreach($GLOBALS['horario'] as $hour => $i){
+        echo '<tr>';
+        
+        echo '</tr>';
+    }
+
+    echo '</table>';
+
+
+
+    echo '<table>';
     echo '<tr>';
     foreach ($GLOBALS['semana'] as $day => $dayvalue) {
         echo "<th> $day </th>";
@@ -103,6 +147,7 @@ function getHorario(){
         }
         echo '</tr>';
     }
+    echo '</table>';
 }
 
 
@@ -139,31 +184,4 @@ function getHorario(){
 
 
 
-$horario1 =  [
-    "DEW" => [
-        "profesor" => "MARIA DEL CARMEN RODRIGUEZ SUAREZ",
-        "taller" => "G201"
-    ],
 
-
-    "DSW" => [
-        "profesor" => "SERGIO RAMOS SUAREZ",
-        "taller" => "G201"
-    ],
-
-    "DPL" => [
-        "profesor" => "MARIA ANTONIA MONTESDEOCA VIERA",
-        "taller" => "G201"
-    ],
-
-    "DOR" => [
-        "profesor" => "ERMIS",
-        "taller" => "G201"
-    ],
-
-    "EMR" => [
-        "profesor" => "profe",
-        "taller" => "G201"
-    ],
-
-];

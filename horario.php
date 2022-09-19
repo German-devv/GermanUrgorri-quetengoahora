@@ -13,13 +13,10 @@
   <h1>Horario semanal</h1>
 
 
-  <form action="index.php" method="get">
-    <table>
-      <?php getHorario(); ?>
-
-
+  <form style="display: flex; "action="index.php" method="get">
     
-    </table>
+      <?php getHorario(); ?>
+    
   </form>
 
 </body>

@@ -92,7 +92,7 @@ $horario = [
 
      [
         date('9:50'),
-        date('11:15')
+        date('10:45')
     ],
 
      [
@@ -117,20 +117,24 @@ $horario = [
 
 
 function getHorario(){
+    $horario = $GLOBALS['horario'];
+
+    
     echo '<table>';
     echo '<tr>';
     echo     '<th> Horario</th>';
     echo '</tr>';
 
-    foreach($GLOBALS['horario'] as $hour => $i){
+
+    for($x = 0; $x < 6; $x++){
         echo '<tr>';
-        
+        echo "<th>" .$horario[$x][0]."-".$horario[$x][1]. "</th>";
         echo '</tr>';
     }
 
     echo '</table>';
 
-
+  
 
     echo '<table>';
     echo '<tr>';
@@ -150,8 +154,23 @@ function getHorario(){
     echo '</table>';
 }
 
+function getWeeksDays(){
+    $semana = $GLOBALS['semana'];
+
+    foreach($semana as $day => $dayvalue){
+       echo "<option value='$day'>$day</option>"; 
+    }
+    
+}
+
+function searchClass($day, $hour){
+    echo 'funciona';
+}
 
 
+if(isset($_REQUEST['search'])){
+    searchClass(1,1);
+}
 
 
 

@@ -13,10 +13,38 @@
   <h1>Horario semanal</h1>
 
 
-  <form style="display: flex; "action="index.php" method="get">
-    
-      <?php getHorario(); ?>
-    
+  <form style="display: flex; " action="" method="get">
+
+    <?php getHorario(); ?>
+
+    <section style="margin-left: 100px;">
+
+      <div>
+        <h3>Buscador</h3>
+        <p>Escoge un día de la semana y una hora para ver tu clase: </p>
+      </div>
+
+      <label for="week">Día:</label>
+      <select name="week" id="week">
+        <?php getWeeksDays(); ?>
+      </select> <br><br>
+
+      <label for="hour">Hora:</label>
+      <input type="time" name="hour" id="hour"><br><br>
+
+      <input type="submit" value="BUSCAR" name="search" id="search">
+
+      <div id="solution">
+        <?php
+        
+        if(isset($_REQUEST['search'])){
+          searchClass(1,1);
+      }
+        ?>
+      </div>
+
+
+    </section>
   </form>
 
 </body>

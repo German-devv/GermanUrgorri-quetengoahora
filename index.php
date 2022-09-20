@@ -164,13 +164,15 @@ function getWeeksDays(){
 }
 
 function searchClass($day, $hour){
-    echo 'funciona';
+
+    $newHour = date('h:i',$hour);
+
+    echo gettype($newHour) ;
+
 }
 
 
-if(isset($_REQUEST['search'])){
-    searchClass(1,1);
-}
+
 
 
 

@@ -38,8 +38,8 @@
         <?php
         
         if(isset($_REQUEST['search'])){
-          searchClass(1,1);
-      }
+          searchClass($_REQUEST['week'],$_REQUEST['hour']);
+        }
         ?>
       </div>
 

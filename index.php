@@ -163,11 +163,32 @@ function getWeeksDays(){
     
 }
 
-function searchClass($day, $hour){
+function searchClass($day, $hourMinute){
 
-    $newHour = date('h:i',$hour);
 
-    echo gettype($newHour) ;
+    $hourMinute = str_replace(':',$hou rMinute);
+    echo $hourMinute;
+
+
+
+
+
+
+
+ /*
+    $hourMinute = explode(':', $hourMinute);
+    $hour = date("H",$hourMinute[0]);
+    $minute = date("i",$hourMinute[1]);
+    $hourMinute = date('H:i', );
+
+
+   
+    echo $hourMinute;
+    echo gettype($hourMinute) ;
+    $hourMinute = time('h:i' , $hourMinute);
+
+    echo gettype($hourMinute) ;
+    */
 
 }
 

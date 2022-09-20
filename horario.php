@@ -30,7 +30,7 @@
       </select> <br><br>
 
       <label for="hour">Hora:</label>
-      <input type="time" name="hour" id="hour"><br><br>
+      <input type="time" name="hour" id="hour" value="00:00"><br><br>
 
       <input type="submit" value="BUSCAR" name="search" id="search">
 

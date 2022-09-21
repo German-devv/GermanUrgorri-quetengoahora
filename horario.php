@@ -10,6 +10,9 @@
 </head>
 
 <body>
+       
+
+
   <h1>Horario semanal</h1>
 
 
@@ -30,16 +33,22 @@
       </select> <br><br>
 
       <label for="hour">Hora:</label>
-      <input type="time" name="hour" id="hour" value="00:00"><br><br>
+      <input type="time" name="hour" id="hour" value="<?php date_default_timezone_set("Europe/Lisbon"); echo date('H:i') ?>"><br><br>
 
-      <input type="submit" value="BUSCAR" name="search" id="search">
+      <input type="submit" value="BUSCAR UNA HORA CONCRETA" name="search" id="search"> <br><br>
+      <input type="submit" value="VER CLASE ACTUAL" name="actualClass" id="actualClass">
 
-      <div id="solution">
+      <div id="solution" >
         <?php
         
-        if(isset($_REQUEST['search'])){
-          searchClass($_REQUEST['week'],$_REQUEST['hour']);
-        }
+
+        if(isset($_REQUEST['search'])) searchClass($_REQUEST['week'],$_REQUEST['hour']);
+          
+        
+        if(isset($_REQUEST['actualClass'])) geAtctualDate();
+          
+        
+      
         ?>
       </div>
 

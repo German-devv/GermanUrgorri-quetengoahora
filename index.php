@@ -120,15 +120,15 @@ function getHorario(){
     $horario = $GLOBALS['horario'];
 
     
-    echo '<table>';
+    echo '<table style="height: 280px;">';
     echo '<tr>';
     echo     '<th> Horario</th>';
     echo '</tr>';
 
 
-    for($x = 0; $x < 6; $x++){
+    for($coordenada = 0; $coordenada < 6; $coordenada++){
         echo '<tr>';
-        echo "<th>" .$horario[$x][0]."-".$horario[$x][1]. "</th>";
+        echo "<th>" .$horario[$coordenada][0]."-".$horario[$coordenada][1]. "</th>";
         echo '</tr>';
     }
 
@@ -136,7 +136,7 @@ function getHorario(){
 
   
 
-    echo '<table>';
+    echo '<table style="height: 280px;">';
     echo '<tr>';
     foreach ($GLOBALS['semana'] as $day => $dayvalue) {
         echo "<th> $day </th>";
@@ -144,10 +144,10 @@ function getHorario(){
     echo '</tr>';
 
 
-    for ($x = 0; $x <= 5; $x++) {
+    for ($coordenada = 0; $coordenada <= 5; $coordenada++) {
         echo '<tr>';
         foreach ($GLOBALS['semana'] as $day => $dayvalue) {
-            echo "<td> $dayvalue[$x] </td>";
+            echo "<td> $dayvalue[$coordenada] </td>";
         }
         echo '</tr>';
     }
@@ -163,66 +163,81 @@ function getWeeksDays(){
     
 }
 
-function searchClass($day, $hourMinute){
+function geAtctualDate(){
 
-
-    $hourMinute = str_replace(':',$hou rMinute);
-    echo $hourMinute;
-
-
-
-
+    date_default_timezone_set("Europe/Lisbon");
+    $date = date("H:i");
+    $check = true;
+    $weekDay = intval(date('w'));
 
 
 
- /*
-    $hourMinute = explode(':', $hourMinute);
-    $hour = date("H",$hourMinute[0]);
-    $minute = date("i",$hourMinute[1]);
-    $hourMinute = date('H:i', );
+    if($weekDay == 1) $weekDay ='lunes';
+    if($weekDay == 2) $weekDay ='martes';
+    if($weekDay == 3) $weekDay ='miercoles';
+    if($weekDay == 4) $weekDay ='jueves';
+    if($weekDay == 5) $weekDay ='viernes';
+    if($weekDay == 6) {
+        $weekDay ='sabado';
+        $check = false;
+    }
+    if($weekDay == 7) {
+        $weekDay ='domingo';
+        $check = false;
+    }
 
 
+    
+
+    if($check == true)searchClass($weekDay,  $date);
+    else echo"<p> No hay ninguna clase programada para las $date del $weekDay.</p>";
    
-    echo $hourMinute;
-    echo gettype($hourMinute) ;
-    $hourMinute = time('h:i' , $hourMinute);
-
-    echo gettype($hourMinute) ;
-    */
-
 }
 
 
+function searchClass($day, $hourMinute){
 
 
 
 
 
+    $asignatura = $GLOBALS['asignatura'];
+    $semana = $GLOBALS['semana'];
+    $horario = $GLOBALS['horario'];
 
 
+    //Aquí se busca que hora se ha seleccionado(1º hora = posicion 0)
+    $coordenada = -1;
+    for($i = 0; $i <= 5; $i ++){
+        if(date('H:i', strtotime($hourMinute)) >= date('H:i', strtotime($horario[$i][0])) && date('H:i', strtotime($hourMinute)) <= date('H:i', strtotime($horario[$i][1]))){
+            
+            $coordenada = $i;
+            
+            break;
+
+        }
+    }
 
 
+  
 
 
+    if($coordenada != -1){
+
+    $horaImpartida = $semana[$day][$coordenada];
+    $aula = $asignatura[$horaImpartida]['taller'];
+    $profesor =  $asignatura[$horaImpartida]['profesor'];
 
 
+    echo "<p>A las $hourMinute del $day tienes $horaImpartida en el aula $aula, impartida por  $profesor. </p>";  
 
+    }
+    else echo "<p> No hay ninguna clase programada para las $hourMinute del $day.</p>";
 
+    
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

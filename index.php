@@ -1,5 +1,6 @@
 <?php
 
+error_reporting(E_ALL ^ E_WARNING);
 
 $asignatura =  [
     "DEW" => [
@@ -35,6 +36,7 @@ $semana = [
          'EMR',
          'DSW',
          'DSW',
+         'DESCANSO',
          'DEW',
          'DEW',
          'DEW',
@@ -44,6 +46,7 @@ $semana = [
          'DPL',
          'DPL',
          'DSW',
+         'DESCANSO',
          'DSW',
          'DOR',
          'DOR',
@@ -53,6 +56,7 @@ $semana = [
          'DEW',
          'DEW',
          'DSW',
+         'DESCANSO',
          'DSW',
          'DOR',
          'DOR',
@@ -62,6 +66,7 @@ $semana = [
          'DPL',
          'DPL',
          'DPL',
+         'DESCANSO',
          'DEW',
          'DEW',
          'EMR',
@@ -71,6 +76,7 @@ $semana = [
          'DOR',
          'DOR',
          'DPL',
+         'DESCANSO',
          'EMR',
          'DSW',
          'DSW',
@@ -93,6 +99,11 @@ $horario = [
      [
         date('9:50'),
         date('10:45')
+    ],
+
+    [
+        date('10:45'),
+        date('11:15')
     ],
 
      [
@@ -126,7 +137,7 @@ function getHorario(){
     echo '</tr>';
 
 
-    for($coordenada = 0; $coordenada < 6; $coordenada++){
+    for($coordenada = 0; $coordenada < 7; $coordenada++){
         echo '<tr>';
         echo "<th>" .$horario[$coordenada][0]."-".$horario[$coordenada][1]. "</th>";
         echo '</tr>';
@@ -144,7 +155,7 @@ function getHorario(){
     echo '</tr>';
 
 
-    for ($coordenada = 0; $coordenada <= 5; $coordenada++) {
+    for ($coordenada = 0; $coordenada <= 6; $coordenada++) {
         echo '<tr>';
         foreach ($GLOBALS['semana'] as $day => $dayvalue) {
             echo "<td> $dayvalue[$coordenada] </td>";
@@ -197,10 +208,6 @@ function geAtctualDate(){
 
 function searchClass($day, $hourMinute){
 
-
-
-
-
     $asignatura = $GLOBALS['asignatura'];
     $semana = $GLOBALS['semana'];
     $horario = $GLOBALS['horario'];
@@ -210,9 +217,7 @@ function searchClass($day, $hourMinute){
     $coordenada = -1;
     for($i = 0; $i <= 5; $i ++){
         if(date('H:i', strtotime($hourMinute)) >= date('H:i', strtotime($horario[$i][0])) && date('H:i', strtotime($hourMinute)) <= date('H:i', strtotime($horario[$i][1]))){
-            
-            $coordenada = $i;
-            
+            $coordenada = $i;   
             break;
 
         }
@@ -228,8 +233,12 @@ function searchClass($day, $hourMinute){
     $aula = $asignatura[$horaImpartida]['taller'];
     $profesor =  $asignatura[$horaImpartida]['profesor'];
 
-
-    echo "<p>A las $hourMinute del $day tienes $horaImpartida en el aula $aula, impartida por  $profesor. </p>";  
+    if($horaImpartida != 'DESCANSO'){
+        echo "<p>A las $hourMinute del $day tienes $horaImpartida en el aula $aula, impartida por  $profesor. </p>";
+    }
+      else{
+        echo "<p>A las $hourMinute del $day tienes $horaImpartida.";
+      }
 
     }
     else echo "<p> No hay ninguna clase programada para las $hourMinute del $day.</p>";
@@ -238,7 +247,3 @@ function searchClass($day, $hourMinute){
     
 
 }
-
-
-
-

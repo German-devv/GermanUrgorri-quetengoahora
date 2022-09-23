@@ -24,7 +24,7 @@ $asignatura =  [
     ],
 
     "EMR" => [
-        "profesor" => "profe",
+        "profesor" => "María García",
         "taller" => "G201"
     ],
 

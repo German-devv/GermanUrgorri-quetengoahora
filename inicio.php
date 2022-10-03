@@ -24,11 +24,11 @@
         <label for="startSelect">Escoja un grupo o profesor:</label>
         <select name="startSelect" id="startSelect">
             <optgroup label="class">
-                <option value="2DAWam">2DAW mañana</option>
-                <option value="2DAWpm">2DAW tarde</option>
+                <option value="0-2DAWam">2DAW mañana</option>
+                <option value="0-2DAWpm">2DAW tarde</option>
             </optgroup>
             <optgroup label="teacher">
-                <option value="MARIA DEL CARMEN RODRIGUEZ SUAREZ">MARIA DEL CARMEN RODRIGUEZ SUAREZ</option>
+                <option value="1-MARIA DEL CARMEN RODRIGUEZ SUAREZ">MARIA DEL CARMEN RODRIGUEZ SUAREZ</option>
                 
             </optgroup>
         </select>

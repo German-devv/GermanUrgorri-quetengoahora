@@ -141,7 +141,7 @@ $semana = [
 ];
 
 $horario = [
-
+    'am'=>[
     [
         date('8:00'),
         date('8:55')
@@ -175,18 +175,61 @@ $horario = [
     [
         date('13:05'),
         date('14:00')
+    ]
+],'pm' =>[
+    [
+        date('16:00'),
+        date('16:55')
     ],
 
+    [
+        date('16:55'),
+        date('17:50')
+    ],
+
+    [
+        date('17:50'),
+        date('18:45')
+    ],
+
+    [
+        date('18:45'),
+        date('19:15')
+    ],
+
+    [
+        date('19:15'),
+        date('20:10')
+    ],
+
+    [
+        date('20:10'),
+        date('21:05')
+    ],
+
+    [
+        date('21:05'),
+        date('22:00')
+    ]
+
+]
 
 ];
 
 
-if (isset($_REQUEST['startSelect'])) setcookie("selected", $_REQUEST['startSelect'], time()+3600);//creo una cookie ya que al ejecutar cualquier funcion pierdo los datos de la anterior pagina 
 
 
-echo($_COOKIE['selected']);
+if (isset($_REQUEST['startSelect'])){
+    $starselect = $_REQUEST['startSelect'];
 
-$selected = $semana[$_COOKIE['selected']];
+    setcookie("selected", $starselect , time()+ 24 * 3600);//creo una cookie ya que al ejecutar cualquier funcion pierdo los datos de la anterior pagina 
+} 
+
+
+
+$cookie =explode('-',$_COOKIE['selected']) ;
+echo($cookie[1]);
+$selected = $semana[$cookie[1]];
 
 
 
@@ -201,7 +244,7 @@ function getHorario(){
     echo     '<th> Horario</th>';
     echo '</tr>';
 
-
+// se sacan las horas
     for ($coordenada = 0; $coordenada < 7; $coordenada++) {
         echo '<tr>';
         echo "<th>" . $horario[$coordenada][0] . "-" . $horario[$coordenada][1] . "</th>";
@@ -214,6 +257,7 @@ function getHorario(){
 
     echo '<table style="height: 280px;">';
     echo '<tr>';
+    //se sacan los días de la semana
     foreach ($semana as $day => $dayvalue) {
         echo "<th> $day </th>";
     }

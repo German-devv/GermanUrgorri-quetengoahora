@@ -56,7 +56,7 @@
         ?>
       </div>
 
-
+      <a href="inicio.php"><button>Volver</button></a>
     </section>
   </form>
 

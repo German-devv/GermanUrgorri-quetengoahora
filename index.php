@@ -1,6 +1,5 @@
 <?php
 
-//error_reporting(E_ALL ^ E_WARNING);
 
 $asignatura =  [
 
@@ -26,7 +25,7 @@ $asignatura =  [
     ],
 
     "EMR" => [
-        "profesor" => "María García",
+        "profesor" => "MARIA DEL CARMEN RODRIGUEZ SUAREZ",
         "taller" => "G201"
     ],
 
@@ -141,140 +140,170 @@ $semana = [
 ];
 
 $horario = [
-    'am'=>[
-    [
-        date('8:00'),
-        date('8:55')
-    ],
 
-    [
-        date('8:55'),
-        date('9:50')
-    ],
+    'am' => [
+        [
+            date('8:00'),
+            date('8:55')
+        ],
 
-    [
-        date('9:50'),
-        date('10:45')
-    ],
+        [
+            date('8:55'),
+            date('9:50')
+        ],
 
-    [
-        date('10:45'),
-        date('11:15')
-    ],
+        [
+            date('9:50'),
+            date('10:45')
+        ],
 
-    [
-        date('11:15'),
-        date('12:10')
-    ],
+        [
+            date('10:45'),
+            date('11:15')
+        ],
 
-    [
-        date('12:10'),
-        date('13:05')
-    ],
+        [
+            date('11:15'),
+            date('12:10')
+        ],
 
-    [
-        date('13:05'),
-        date('14:00')
+        [
+            date('12:10'),
+            date('13:05')
+        ],
+
+        [
+            date('13:05'),
+            date('14:00')
+        ]
+    ], 
+
+    'pm' => [
+        [
+            date('16:00'),
+            date('16:55')
+        ],
+
+        [
+            date('16:55'),
+            date('17:50')
+        ],
+
+        [
+            date('17:50'),
+            date('18:45')
+        ],
+
+        [
+            date('18:45'),
+            date('19:15')
+        ],
+
+        [
+            date('19:15'),
+            date('20:10')
+        ],
+
+        [
+            date('20:10'),
+            date('21:05')
+        ],
+
+        [
+            date('21:05'),
+            date('22:00')
+        ]
+
     ]
-],'pm' =>[
-    [
-        date('16:00'),
-        date('16:55')
-    ],
-
-    [
-        date('16:55'),
-        date('17:50')
-    ],
-
-    [
-        date('17:50'),
-        date('18:45')
-    ],
-
-    [
-        date('18:45'),
-        date('19:15')
-    ],
-
-    [
-        date('19:15'),
-        date('20:10')
-    ],
-
-    [
-        date('20:10'),
-        date('21:05')
-    ],
-
-    [
-        date('21:05'),
-        date('22:00')
-    ]
-
-]
 
 ];
 
 
+if (isset($_REQUEST['startSelect'])) getClassOrTeacher();
 
 
-if (isset($_REQUEST['startSelect'])){
-    $starselect = $_REQUEST['startSelect'];
+function getClassOrTeacher()
+{
 
-    setcookie("selected", $starselect , time()+ 24 * 3600);//creo una cookie ya que al ejecutar cualquier funcion pierdo los datos de la anterior pagina 
-} 
+  setcookie("selected", $_REQUEST['startSelect'], time() + 24 * 3600); //creo una cookie ya que al ejecutar cualquier funcion pierdo los datos de la anterior pagina 
+  header("Location: horario.php");
+
+}
 
 
 
-$cookie =explode('-',$_COOKIE['selected']) ;
-echo($cookie[1]);
+
+
+$cookie = explode('-', $_COOKIE['selected']);
 $selected = $semana[$cookie[1]];
 
 
 
 
-function getHorario(){
+function getHorario()
+{
     $horario = $GLOBALS['horario'];
     $semana = $GLOBALS['selected'];
+    $cookie = substr($GLOBALS['cookie'][1], -2);
+    
 
-
+    getHours($horario,$cookie);
+    
     echo '<table style="height: 280px;">';
-    echo '<tr>';
-    echo     '<th> Horario</th>';
-    echo '</tr>';
 
-// se sacan las horas
-    for ($coordenada = 0; $coordenada < 7; $coordenada++) {
-        echo '<tr>';
-        echo "<th>" . $horario[$coordenada][0] . "-" . $horario[$coordenada][1] . "</th>";
-        echo '</tr>';
-    }
+    getWeeksDays($semana);
+
+    echo($GLOBALS['cookie'][0]);
+    if($GLOBALS['cookie'][0]==0) getHorarioGrupo($semana);
+    else getHorarioTeacher($semana);
+    
 
     echo '</table>';
+}
 
-
-
-    echo '<table style="height: 280px;">';
-    echo '<tr>';
+function getWeeksDays($semana){
+        echo '<tr>';
     //se sacan los días de la semana
     foreach ($semana as $day => $dayvalue) {
         echo "<th> $day </th>";
     }
     echo '</tr>';
+}
 
+function getHours($horario,$cookie){
+    echo '<table style="height: 280px;">';
+    echo '<tr>';
+    echo     '<th> Horario</th>';
+    echo '</tr>';
 
-    for ($coordenada = 0; $coordenada <= 6; $coordenada++) {
+    // se sacan las horas
+    for ($coordenada = 0; $coordenada < 7; $coordenada++) {
+        echo '<tr>';
+        echo "<th>" . $horario[$cookie][$coordenada][0] . "-" . $horario[$cookie][$coordenada][1] . "</th>";
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
+
+function getHorarioGrupo($semana){
+        for ($coordenada = 0; $coordenada <= 6; $coordenada++) {
         echo '<tr>';
         foreach ($semana as $day => $dayvalue) {
             echo "<td> $dayvalue[$coordenada] </td>";
         }
         echo '</tr>';
     }
-    echo '</table>';
 }
 
-function getWeeksDays(){
+
+function getHorarioTeacher($semana){
+    echo('fuencie');
+}
+
+
+function getWeeksDaysOption()
+{
     $semana = $GLOBALS['selected'];
 
     foreach ($semana as $day => $dayvalue) {
@@ -282,7 +311,8 @@ function getWeeksDays(){
     }
 }
 
-function geAtctualDate(){
+function geAtctualDate()
+{
 
     date_default_timezone_set("Europe/Lisbon");
     $date = date("H:i");
@@ -313,11 +343,12 @@ function geAtctualDate(){
 }
 
 
-function searchClass($day, $hourMinute){
-    try {
+function searchClass($day, $hourMinute)
+{
+  
         $grupo = $GLOBALS['asignatura'];
         $semana = $GLOBALS['selected'];
-        $horario = $GLOBALS['horario'];
+        $horario = $GLOBALS['horario'][substr($GLOBALS['cookie'][1], -2)];
 
 
         //Aquí se busca que hora se ha seleccionado(1º hora = posicion 0)
@@ -334,7 +365,7 @@ function searchClass($day, $hourMinute){
 
 
         if ($coordenada != -1) {
-            
+
             $horaImpartida = $semana[$day][$coordenada];
             $aula = $grupo[$horaImpartida]['taller'];
             $profesor =  $grupo[$horaImpartida]['profesor'];
@@ -345,6 +376,5 @@ function searchClass($day, $hourMinute){
                 echo "<p>A las $hourMinute del $day tienes $horaImpartida.";
             }
         } else echo "<p> No hay ninguna clase programada para las $hourMinute del $day.</p>";
-    } catch (Exception $e) {
-    }
+  
 }

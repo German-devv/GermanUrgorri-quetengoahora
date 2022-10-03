@@ -6,15 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  
-  
-  <?php include("index.php") ?>
+
+
+  <?php
+
+
+
+
+
+
+
+  include("index.php")
+
+  ?>
   <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
   <title>Horario semanal</title>
 </head>
 
 <body>
-       
+
 
 
   <h1>Horario semanal</h1>
@@ -33,26 +43,27 @@
 
       <label for="week">Día:</label>
       <select name="week" id="week">
-        <?php getWeeksDays(); ?>
+        <?php getWeeksDaysOption(); ?>
       </select> <br><br>
 
       <label for="hour">Hora:</label>
-      <input type="time" name="hour" id="hour" value="<?php date_default_timezone_set("Europe/Lisbon"); echo date('H:i') ?>"><br><br>
+      <input type="time" name="hour" id="hour" value="<?php date_default_timezone_set("Europe/Lisbon");
+                                                      echo date('H:i') ?>"><br><br>
 
       <input type="submit" value="BUSCAR UNA HORA CONCRETA" name="search" id="search"> <br><br>
       <input type="submit" value="VER CLASE ACTUAL" name="actualClass" id="actualClass">
 
-      <div id="solution" >
+      <div id="solution">
         <?php
-        
 
-        if(isset($_REQUEST['search'])) searchClass($_REQUEST['week'],$_REQUEST['hour']);
-          
-        
-        if(isset($_REQUEST['actualClass'])) geAtctualDate();
-          
-        
-      
+
+        if (isset($_REQUEST['search'])) searchClass($_REQUEST['week'], $_REQUEST['hour']);
+
+
+        if (isset($_REQUEST['actualClass'])) geAtctualDate();
+
+
+
         ?>
       </div>
 

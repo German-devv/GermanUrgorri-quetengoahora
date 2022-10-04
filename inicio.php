@@ -12,8 +12,8 @@
 </head>
 
 <body>
-
-
+    <?php include('index.php'); ?>
+    
 
     <h1>Horario semanal</h1>
 
@@ -28,7 +28,8 @@
                 <option value="0-2DAWpm">2DAW tarde</option>
             </optgroup>
             <optgroup label="teacher">
-                <option value="1-MARIA DEL CARMEN RODRIGUEZ SUAREZ">MARIA DEL CARMEN RODRIGUEZ SUAREZ</option>
+                
+                <?php GetTeachersOption();?>
                 
             </optgroup>
         </select>
@@ -38,7 +39,7 @@
         <input type="submit" value="MOSTRAR" name="actualClass" id="actualClass">
 
 
-
+        
 
     </form>
 

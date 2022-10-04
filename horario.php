@@ -11,11 +11,6 @@
   <?php
 
 
-
-
-
-
-
   include("index.php")
 
   ?>
@@ -27,14 +22,14 @@
 
 
 
-  <h1>Horario semanal</h1>
+  <h1>Horario semanal <?php GetTeacherName(); ?></h1>
 
 
-  <form style="display: flex; " action="" method="get">
+  <form  action="horario.php" method="get">
 
-    <?php getHorario(); ?>
+    <?php ChoseHorario(); ?>
 
-    <section style="margin-left: 100px;">
+    <section class="<?php Hidden(); ?>" style="margin-left: 100px;">
 
       <div>
         <h3>Buscador</h3>
@@ -43,7 +38,7 @@
 
       <label for="week">Día:</label>
       <select name="week" id="week">
-        <?php getWeeksDaysOption(); ?>
+        <?php GetWeeksDaysOption(); ?>
       </select> <br><br>
 
       <label for="hour">Hora:</label>
@@ -57,17 +52,17 @@
         <?php
 
 
-        if (isset($_REQUEST['search'])) searchClass($_REQUEST['week'], $_REQUEST['hour']);
+        if (isset($_REQUEST['search'])) SearchClass($_REQUEST['week'], $_REQUEST['hour']);
 
 
-        if (isset($_REQUEST['actualClass'])) geAtctualDate();
+        if (isset($_REQUEST['actualClass'])) GeAtctualDate();
 
 
 
         ?>
       </div>
 
-      <a href="inicio.php"><button>Volver</button></a>
+      
     </section>
   </form>
 
